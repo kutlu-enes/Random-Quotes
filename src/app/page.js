@@ -11,11 +11,12 @@ import { quotes as initialQuotes } from "@/quotes";
 import { useState } from "react";
 
 export default function Home() {
-  const quotes = [...initialQuotes];
-  let [index, setIndex] = useState(0);
-  let user = "User 1";
-  let isLiked = quotes[index].likedBy.includes(user)
-  const [liked, setLiked] = useState(isLiked);
+  const [quotes, setQuotes] = useState(initialQuotes);
+  const [index, setIndex] = useState(0);
+  const userId = "User 1";
+  
+  const currentQuote = quotes[index];
+  const isLiked = currentQuote.likedBy.includes(userId);
 
 
   function nextQuoteBtn() {
