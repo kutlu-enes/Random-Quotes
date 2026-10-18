@@ -39,16 +39,18 @@ export default function Home() {
   }
 
   function likeBtn() {
-    if (!quotes[index].likedBy.includes(user)) {
-      quotes[index].likedBy.push(user);
-      setLiked(isLiked => !isLiked);
-      console.log(quotes[index].likedBy[0]);
-    } else {
-      let userIndex = quotes[index].likedBy.indexOf(user);
-      quotes[index].likedBy.splice(userIndex, 1);
-      setLiked(isLiked => !isLiked);
-      console.log(quotes[index].likedBy[0]);
-    }
+    setQuotes((prevQuotes) =>
+     prevQuotes.map((quote, quoteIndex) => {
+      if (quoteIndex !== index) return quote;
+      const isLiked = quote.likedBy.includes(userId);
+      return {
+       ...quote,
+       likedBy: isLiked
+        ? quote.likedBy.filter((id) => id !== userId)
+        : [...quote.likedBy, userId],
+      };
+    })
+  );
   }
 
   return (
