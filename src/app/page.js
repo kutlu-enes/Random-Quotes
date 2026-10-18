@@ -1,8 +1,6 @@
 "use client";
 
-import { LikeQuoteButton } from "@/components/buttons/likeQuoteBtn";
-import { NextQuoteBtn } from "@/components/buttons/nextQuoteBtn";
-import { PrevQuoteBtn } from "@/components/buttons/prevQuoteBtn";
+import { Button } from "@/components/buttons";
 import { Card } from "@/components/card";
 import { RightIcon, LeftIcon, HeartIcon } from "@/components/icons";
 import { AuthorName } from "@/components/typography/author";
@@ -13,11 +11,10 @@ import { useState } from "react";
 export default function Home() {
   const [quotes, setQuotes] = useState(initialQuotes);
   const [index, setIndex] = useState(0);
-  const userId = "User 1";
-  
+  const userId = "user_1";
+
   const currentQuote = quotes[index];
   const isLiked = currentQuote.likedBy.includes(userId);
-
 
   function nextQuoteBtn() {
     setIndex((prevIndex) => {
@@ -38,19 +35,19 @@ export default function Home() {
     console.log("Current quoute index is:", index);
   }
 
-  function likeBtn() {
+  function toggleLike() {
     setQuotes((prevQuotes) =>
-     prevQuotes.map((quote, quoteIndex) => {
-      if (quoteIndex !== index) return quote;
-      const isLiked = quote.likedBy.includes(userId);
-      return {
-       ...quote,
-       likedBy: isLiked
-        ? quote.likedBy.filter((id) => id !== userId)
-        : [...quote.likedBy, userId],
-      };
-    })
-  );
+      prevQuotes.map((quote, quoteIndex) => {
+        if (quoteIndex !== index) return quote;
+        const isLiked = quote.likedBy.includes(userId);
+        return {
+          ...quote,
+          likedBy: isLiked
+            ? quote.likedBy.filter((id) => id !== userId)
+            : [...quote.likedBy, userId],
+        };
+      }),
+    );
   }
 
   return (
@@ -64,17 +61,17 @@ export default function Home() {
         </AuthorName>
 
         <div className="flex place-content-around">
-          <PrevQuoteBtn handleClick={prevQuoteBtn}>
+          <Button handleClick={prevQuoteBtn}>
             <LeftIcon />
-          </PrevQuoteBtn>
+          </Button>
 
-          <LikeQuoteButton handleClick={likeBtn}>
-            <HeartIcon liked={isLiked}></HeartIcon>
-          </LikeQuoteButton>
+          <Button handleClick={toggleLike}>
+            <HeartIcon liked={isLiked} />
+          </Button>
 
-          <NextQuoteBtn handleClick={nextQuoteBtn}>
+          <Button handleClick={nextQuoteBtn}>
             <RightIcon />
-          </NextQuoteBtn>
+          </Button>
         </div>
       </Card>
     </main>

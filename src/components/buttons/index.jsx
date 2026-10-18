@@ -1,4 +1,4 @@
-export function LikeQuoteButton({children, handleClick}){
+export function Button({children, handleClick}){
   return (
   <button onClick={handleClick} className={`cursor-pointer`}>{children}</button>
 )
