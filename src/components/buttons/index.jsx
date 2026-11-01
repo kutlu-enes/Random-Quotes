@@ -1,5 +1,5 @@
-export function Button({children, handleClick}){
+export function Button({children, handleClick, className}){
   return (
-  <button onClick={handleClick} className={`cursor-pointer`}>{children}</button>
+  <button className={`${className}`} onClick={handleClick}>{children}</button>
 )
 }

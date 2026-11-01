@@ -201,9 +201,9 @@ export const quotes = [
   }
 ];
 
-function addProperty (){
-  quotes.forEach((quote) => {
-    quote.likedBy = [];
-  })
-}
-addProperty();
+// function addProperty (){
+//   quotes.forEach((quote) => {
+//     quote.likedBy = [];
+//   })
+// }
+// addProperty();
